@@ -69,7 +69,12 @@ const deleteCollection = (request, response) => {
     if (error) {
       throw error;
     }
-    response.status(200).send(`Collection deleted with ID: ${id}`);
+    pool.query('DELETE FROM repos WHERE collection_id = $1 and user_id = $2', [id, user_id], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).send(`Collection deleted with ID: ${id}`);
+    });
   });
 };
 
