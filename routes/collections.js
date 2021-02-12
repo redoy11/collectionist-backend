@@ -5,7 +5,8 @@ const Pool = require('pg').Pool;
 
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL + `?ssl=true`,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 const getCollections = (request, response) => {
